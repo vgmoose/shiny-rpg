@@ -1,5 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 
 
@@ -17,6 +20,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 	
 	int px, py; // max sizes
 	
+	Character c;
+	
 	public GameWindow()
 	{
 		clock.start();
@@ -32,13 +37,17 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 			this.p = parent;
 			setBackground(Color.white);
 			
+			p.c = new Character(this);
+			
 		}
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
+						
+			p.c.drawSprite(g, p.playx, p.playy, p.getDirectionValue());
 			
-			g.setColor(Color.blue);
-			g.fillRect(p.playx, p.playy, 10, 10);
+//			g.setColor(Color.blue);
+//			g.fillRect(p.playx, p.playy, 10, 10);
 			
 			if (p.isMouseDown()) 
 			{
@@ -108,6 +117,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 			g.setColor(Color.black);
 			g.drawString(p.getCoordinatesString(), 10, 20);
 			g.drawString(p.getDirectionStatus(), 10, 40);
+			
+			
 
 
 		}
