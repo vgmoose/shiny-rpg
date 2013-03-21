@@ -90,13 +90,25 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 				
 				p.playx += 6*p.joyx;
 				p.playy += 6*p.joyy;
+				
+				Robot r;
+				try {
+					// align mouse
+					r = new Robot();
+					r.mouseMove(bx+p.getX(), by+p.getY());
+				} catch (AWTException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				
 
 				
 			}
 			g.setColor(Color.black);
-			g.drawString(p.getDirectionStatus(), 10, 20);
+			g.drawString(p.getCoordinatesString(), 10, 20);
+			g.drawString(p.getDirectionStatus(), 10, 40);
+
 
 		}
 	}
@@ -118,7 +130,54 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 		me.popup();
 	}
 	
+	public int getDirectionValue()
+	{
+		return (int)((((Math.atan2(my-iy, mx-ix))*(180/Math.PI))+180+22.5)/45);
+	}
+	
 	public String getDirectionStatus() 
+	{
+		String s;
+		int a = getDirectionValue();
+				
+		switch (a)
+		{
+		case 1:
+			s = "Up-Left";
+			break;
+		case 2:
+			s = "Up";
+			break;
+		case 3:
+			s = "Up-Right";
+			break;
+		case 4:
+			s = "Right";
+			break;
+		case 5:
+			s = "Down-Right";
+			break;
+		case 6:
+			s = "Down";
+			break;
+		case 7:
+			s = "Down-Left";
+			break;
+		case 0:
+		case 8:
+			s = "Left";
+			break;
+		
+		
+		default:
+			s = "";
+			
+		}
+		
+		return s;
+	}
+
+	public String getCoordinatesString() 
 	{
 		return ""+joyx+", "+joyy;
 	}
