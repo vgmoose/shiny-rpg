@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.net.MalformedURLException;
 
 import javax.swing.*;
 
@@ -9,7 +7,10 @@ import javax.swing.*;
 
 public class GameWindow extends JFrame implements ActionListener, MouseMotionListener, MouseListener
 {
-    Timer clock = new Timer(20,this);
+	private static final long serialVersionUID = 1L;
+
+	Timer clock = new Timer(20,this);
+	static Map map = new Map();
 
 	boolean ismousedown = false;
 	int ix, iy, mx, my; // initial and mouse current
@@ -29,6 +30,7 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 	
 	static class DrawBoard extends JPanel
 	{
+		private static final long serialVersionUID = 1L;
 		GameWindow p;
 		
 		DrawBoard(GameWindow parent)
@@ -43,6 +45,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
+			
+			map.drawMap(g);
 						
 			p.c.drawSprite(g, p.playx, p.playy, p.getDirectionValue());
 			
@@ -81,9 +85,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 				
 				((Graphics2D) g).setStroke(new BasicStroke(3));
 
-				g.setColor(Color.LIGHT_GRAY);
+				g.setColor(new Color(0,150,50,100));
 				g.fillOval(p.ix-distance/2, p.iy-distance/2-22, distance, distance); // outer
-				g.setColor(Color.gray);
 				g.fillOval(p.getInitialX()-5, p.getInitialY()-27, 10, 10); // initial
 //				g.setColor(Color.black);
 				g.fillOval(bx-5, by-27, 10, 10); // head
@@ -130,7 +133,7 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 		GameWindow me = new GameWindow();
 		DrawBoard db = new DrawBoard(me);
 		
-		db.setPreferredSize(new Dimension(500, 500));
+		db.setPreferredSize(new Dimension(400, 250));
 		db.repaint();
 		
 		me.getContentPane().add(db);

@@ -1,12 +1,10 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -82,5 +80,7 @@ public class Character
 	{
 		BufferedImage img2 = cropDat(direction);
 	    ((Graphics2D) g).drawImage(img2, x, y, db);
+	    g.setColor(Color.black);
+	    g.fillRect(x+7, y+16, 16, 16);
 	}
 }
