@@ -1,0 +1,3 @@
+Here's an example of a functioning GameEngine using an interface similar to fingerpad.
+
+click the mouse anywhere on screen to bring up a circle pad. Then drag the mouse in any direction to use it, akin to using a joystick. The character will move appropriately.
