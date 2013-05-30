@@ -15,7 +15,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 	boolean ismousedown = false;
 	int ix, iy, mx, my; // initial and mouse current
 	
-	int playx, playy; // temp player coor
+	int playx = 10, playy = 10; // temp player coor
+	int pplayx, pplayy; // previous player coor
 	
 	double joyx, joyy;
 	
@@ -26,6 +27,17 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 	public GameWindow()
 	{
 		clock.start();
+	}
+	
+	public void validateCoordinates(int x, int y) 
+	{
+		boolean[] valid = map.validMove(x+7,y+16, 16);
+		
+		if (!valid[0])
+			playx = pplayx;
+		
+		if (!valid[1])
+			playy = pplayy;
 	}
 	
 	static class DrawBoard extends JPanel
@@ -39,7 +51,7 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 			this.p = parent;
 			setBackground(Color.white);
 			
-			p.c = new Character(this);
+			p.c = new Character(this, map);
 			
 		}
 		public void paintComponent(Graphics g)
@@ -95,13 +107,15 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 
 				g.drawLine(bx, by-22, p.ix, p.iy-22); // line
 //				g.setColor(Color.darkGray);
-			
 
 				p.joyx = (bx - p.ix) / 50.0;
 				p.joyy = (by - p.iy) / 50.0;
 				
-				p.playx += 6*p.joyx;
-				p.playy += 6*p.joyy;
+				p.pplayx = p.playx;
+				p.pplayy = p.playy;
+				
+				p.playx += 4*p.joyx;
+				p.playy += 4*p.joyy;
 				
 				Robot r;
 				try {
@@ -125,6 +139,7 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 
 
 		}
+		
 	}
 
 
@@ -299,6 +314,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 		setResizable(false);
 		setVisible(true);
 	}
+	
+	
 
 
 }

@@ -12,12 +12,15 @@ import javax.imageio.ImageIO;
 public class Character 
 {
 	Graphics g;
+	GameWindow gw;
 	GameWindow.DrawBoard db;
 	BufferedImage img1;
 	int prevd = -1, frame = 0;
+	Map map;
 	
-	Character(GameWindow.DrawBoard db)
+	Character(GameWindow.DrawBoard db, Map map)
 	{
+		this.gw = db.p;
 		this.db = db;
 		try {
 			img1 = ImageIO.read(new File("solana.png").toURI().toURL());
@@ -78,9 +81,24 @@ public class Character
 	
 	void drawSprite(Graphics g, int x, int y, int direction) 
 	{
+		gw.validateCoordinates(x, y);
+		
 		BufferedImage img2 = cropDat(direction);
 	    ((Graphics2D) g).drawImage(img2, x, y, db);
-	    g.setColor(Color.black);
-	    g.fillRect(x+7, y+16, 16, 16);
+	    g.setColor(new Color(0,0,0,100));
+	    g.fillRect(x+8, y+16, 16, 16);
+	    g.setColor(new Color(255,0,0,100));
+	    g.fillRect((x+8)/16*16, (y+16)/16*16, 16, 16);
+	    g.setColor(new Color(0,255,0,100));
+	    g.fillRect((x+8+16)/16*16, (y+16)/16*16, 16, 16);
+	    g.setColor(new Color(0,0,255,100));
+	    g.fillRect((x+8)/16*16, (y+32)/16*16, 16, 16);
+	    g.setColor(new Color(255,255,0,100));
+	    g.fillRect((x+8+16)/16*16, (y+32)/16*16, 16, 16);
+
+	 
+//	    g.fillRect((x+8)/16*16, (y+16)/16*16, 16, 16);
+
 	}
+
 }

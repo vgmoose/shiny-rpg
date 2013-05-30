@@ -54,6 +54,39 @@ public class Map
 			}
 		}
 	}
+
+	public boolean[] validMove(int x, int y, int size) 
+	{
+		boolean[] b = {true, true};
+		
+		y = y/chunk;
+		x = x/chunk;
+		int ys = (y+size)/chunk;
+		int xs = (x+size)/chunk;
+		
+		try
+		{
+		// validate x
+		if (map[y].charAt(x) == '1' || map[y].charAt(xs) == '1')
+			b[0] = false;
+		} catch (Exception e)
+		{
+			b[0] = false;
+		}
+		
+		// validate y
+		try
+		{
+		if (map[ys].charAt(x) == '1' || map[ys].charAt(xs) == '1')
+			b[1] = false;
+		} catch (Exception e)
+		{
+			b[1] = false;
+		}
+
+		
+		return b;
+	}
 	
 	
 }
