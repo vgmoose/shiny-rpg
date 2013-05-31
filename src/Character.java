@@ -85,19 +85,17 @@ public class Character
 		
 		BufferedImage img2 = cropDat(direction);
 	    ((Graphics2D) g).drawImage(img2, x, y, db);
-	    g.setColor(new Color(0,0,0,100));
-	    g.fillRect(x+8, y+16, 16, 16);
-	    g.setColor(new Color(255,0,0,100));
-	    g.fillRect((x+8)/16*16, (y+16)/16*16, 16, 16);
-	    g.setColor(new Color(0,255,0,100));
-	    g.fillRect((x+8+16)/16*16, (y+16)/16*16, 16, 16);
-	    g.setColor(new Color(0,0,255,100));
-	    g.fillRect((x+8)/16*16, (y+32)/16*16, 16, 16);
-	    g.setColor(new Color(255,255,0,100));
-	    g.fillRect((x+8+16)/16*16, (y+32)/16*16, 16, 16);
-
-	 
+	    
+//	    g.setColor(new Color(0,0,0,100));
+//	    g.fillRect(x+8, y+16, 16, 16);
+//	    g.setColor(new Color(255,0,0,100));
 //	    g.fillRect((x+8)/16*16, (y+16)/16*16, 16, 16);
+//	    g.setColor(new Color(0,255,0,100));
+//	    g.fillRect((x+8+16)/16*16, (y+16)/16*16, 16, 16);
+//	    g.setColor(new Color(0,0,255,100));
+//	    g.fillRect((x+8)/16*16, (y+32)/16*16, 16, 16);
+//	    g.setColor(new Color(255,255,0,100));
+//	    g.fillRect((x+8+16)/16*16, (y+32)/16*16, 16, 16);
 
 	}
 

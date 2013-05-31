@@ -43,8 +43,8 @@ public class Map
 				
 				if (c=='0')
 				{
-					g.setColor(Color.GRAY);
-					g.drawRect(y*chunk+yoffset, x*chunk+xoffset, chunk, chunk);
+//					g.setColor(Color.GRAY);
+//					g.drawRect(y*chunk+yoffset, x*chunk+xoffset, chunk, chunk);
 				}
 				else
 				{
@@ -61,30 +61,40 @@ public class Map
 		
 		y = y/chunk;
 		x = x/chunk;
-		int ys = (y+size)/chunk;
-		int xs = (x+size)/chunk;
 		
-		try
-		{
+		boolean[] directions = new boolean[4];
+		
+		for (int i=0; i<2; i++)
+			for (int j=0; j<2; j++)
+				try
+				{
+					directions[i*2+j] = map[y+i].charAt(x+j) == '1';
+				} catch (Exception e)
+				{
+					directions[i*2+j] = true;
+				}
+		
+		boolean upLeft = directions[0],
+				upRight = directions[1],
+				downLeft = directions[2],
+				downRight = directions[3];
 		// validate x
-		if (map[y].charAt(x) == '1' || map[y].charAt(xs) == '1')
+		if ((upLeft && downLeft) || (upRight && downRight))
 			b[0] = false;
-		} catch (Exception e)
-		{
-			b[0] = false;
-		}
 		
 		// validate y
-		try
-		{
-		if (map[ys].charAt(x) == '1' || map[ys].charAt(xs) == '1')
+		if ((upLeft && upRight) || (downLeft && downRight))
 			b[1] = false;
-		} catch (Exception e)
+		
+		// validate diagonals
+		if ((upLeft && !upRight && !downLeft && !downRight) 
+				|| !upLeft && upRight && !downLeft && !downRight
+				|| !upLeft && !upRight && downLeft && !downRight
+				|| !upLeft && !upRight && !downLeft && downRight)
 		{
-			b[1] = false;
+			b[0] = false; b[1] = false;
 		}
 
-		
 		return b;
 	}
 	

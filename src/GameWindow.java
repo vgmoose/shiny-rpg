@@ -114,8 +114,8 @@ public class GameWindow extends JFrame implements ActionListener, MouseMotionLis
 				p.pplayx = p.playx;
 				p.pplayy = p.playy;
 				
-				p.playx += 4*p.joyx;
-				p.playy += 4*p.joyy;
+				p.playx += 5*p.joyx;
+				p.playy += 5*p.joyy;
 				
 				Robot r;
 				try {
